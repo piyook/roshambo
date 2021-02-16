@@ -4,16 +4,17 @@ import rootGetters from "./rootGetters.js";
 import rootActions from "./rootActions.js";
 
 import auth from "@/store/modules/Auth";
+import api from "@/store/modules/Api";
 
 
 export default createStore({
   state: {
-    isLoggedIn:false,
   },
   getters: rootGetters,
   mutations: rootMutations,
   actions: rootActions,
   modules: {
     auth,
+    api,
   }
 })

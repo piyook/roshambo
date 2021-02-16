@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ActionController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\HiscoreController;
 
 /*
@@ -27,13 +27,12 @@ Route::middleware('auth:sanctum')->get('/users/{user}', function (Request $reque
 // add the api game & hiscores routes into the group below once testing has finished
 Route::middleware('auth:sanctum')->group( function() { 
 
-    Route::get('/game', [ActionController::class, 'getRandomAction'] );
+    Route::post('/game', [GameController::class, 'playGame'] );
 
     Route::get('/hiscores', [HiscoreController::class, 'TopTenHiscores', ]);
 
-    Route::get("/hiscores/{id}", [HiscoreController::class, 'myHighScores']);
+    Route::get("/hiscores/{id}", [HiscoreController::class, 'myBank']);
 
-    Route::post("/hiscores/{id}",  [HiscoreController::class, 'addMyScore']);
 
 });
 

@@ -15,18 +15,14 @@ class HiscoreController extends Controller
     }
 
 
-    public function myHighScores(Hiscore $Hiscore, $id)
+    public function myBank(Hiscore $Hiscore, $id)
     {
 
-        return $Hiscore->getUserTopTen($id);
+        return $Hiscore->getBank($id);
 
     }
 
-    public function addMyScore(Hiscore $Hiscore, Request $Request, $id){
-
-        $Hiscore->addScore($id, $Request['score']);
-
-    }
+   
 
     
 }

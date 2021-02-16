@@ -1,18 +1,19 @@
 <template>
   <div class="container">
     <home-hero> </home-hero>
-    <home-intro></home-intro>
+    <home-rules></home-rules>
+    
   </div>
 </template>
 
 <script>
-import HomeHero from "../components/HomePage/HomeHero";
-import HomeIntro from "../components/HomePage/HomeIntro";
+import HomeHero from "@/components/HomePage/HomeHero";
+import HomeRules from "@/components/HomePage/HomeRules";
 
 export default {
   components: {
     HomeHero,
-    HomeIntro,
+    HomeRules,
   },
 };
 </script>

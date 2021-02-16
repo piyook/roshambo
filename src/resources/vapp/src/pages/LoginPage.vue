@@ -5,6 +5,10 @@
 
     <login-form mode="login"> </login-form>
 
+    <div class="text-center"> 
+        <router-link to="/userregister">Not Registered? Register Here </router-link>
+    </div>
+
 </div>
 </template>
 
@@ -19,3 +23,9 @@ export default {
     }, 
 }
 </script>
+
+<style scoped>
+ div {
+     max-width:400px;
+ }
+</style>

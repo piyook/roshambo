@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["authorized"],{5893:function(e,n,t){"use strict";t.r(n);var o=t("7a23");function s(e,n){return Object(o["o"])(),Object(o["d"])("h1",null,"This is the Logged In Users page")}const r={};r.render=s;n["default"]=r}}]);
-//# sourceMappingURL=authorized.b7c42e93.js.map

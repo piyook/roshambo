@@ -1,10 +1,19 @@
 <template>
-  <div id="nav" class="text-center mt-2">
-    <router-link to="/">About</router-link> |
-    <router-link to="/about">Play</router-link>
-  </div>
-  <router-view />
+<div>
+  <header-comp> </header-comp>
+  <router-view> </router-view>
+</div>
 </template>
+
+<script>
+import HeaderComp from './components/Global/Header';
+export default {
+  components: {
+    HeaderComp,
+  }
+  
+}
+</script>
 
 <style>
 div #nav {

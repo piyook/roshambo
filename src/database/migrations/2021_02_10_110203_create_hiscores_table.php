@@ -18,7 +18,7 @@ class CreateHiscoresTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users');
-            $table->integer('score')->unsigned();
+            $table->integer('score')->unsigned()->default('100');
         });
     }
 

@@ -19,21 +19,35 @@ class Hiscore extends Model
             ->get();
     }
 
-    public function addScore($id, $score)
+    public function createUserBank($id){
 
-    {
-        $this->userId = $id;
-        $this->score = $score;
-        $this->save();
+            $this->upsert([
+                'userId' => $id,
+                'score' => 100
+            ], ['userId'], ['score']);
+
     }
 
-    public function getUserTopTen($id)
+
+    public function getBank($id)
     {
-        return $this
+        $bankFunds =  $this
             ->select('score','created_at')
             ->where('userId', '=', $id)
-            ->orderByDesc('score')
-            ->limit(10)
             ->get();
+
+            return $bankFunds[0]->score;
+    }
+
+    public function updateBank($userId, $userStake){
+            
+        $bankFunds = $this->select('score')->where('userId', '=', $userId)->get();
+
+        $newBankFunds = ($bankFunds[0]->score) + $userStake ;
+
+        if ($newBankFunds < 0) {return;}
+        
+        $bank = Hiscore::where('userId',$userId);
+        $bank->update(["score"=>$newBankFunds]);
     }
 }

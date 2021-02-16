@@ -11,6 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    meta: { middleware: [guest] },
     component: HomePage
   },
   {
@@ -29,10 +30,22 @@ const routes = [
     component: () => import(/* webpackChunkName: "register" */ '../pages/RegisterPage.vue')
   },
   {
-    path: '/userauthorized',
+    path: '/userhome',
     name: 'Authorized',
     meta: {middleware: [auth]},
     component: () => import(/* webpackChunkName: "authorized" */ '../pages/AuthHome.vue')
+  },
+  {
+    path: '/about',
+    name: 'About',
+    meta: { middleware: [guest] },
+    component: () => import(/* webpackChunkName: "authorized" */ '../pages/AboutPage.vue')
+  },
+  {
+    path: '/game',
+    name: 'Game',
+    meta: {middleware: [auth]},
+    component: () => import(/* webpackChunkName: "authorized" */ '../pages/GamePage.vue')
   },
   {
     path: "/:pathMatch(.*)*",

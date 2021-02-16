@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["register~21a852d5"],{"56b4":function(e,n,t){"use strict";t.r(n);var r=t("7a23");function i(e,n){return Object(r["o"])(),Object(r["d"])("h1",null,"This is the registration page")}const s={};s.render=i;n["default"]=s}}]);
-//# sourceMappingURL=register~21a852d5.b99a62fc.js.map

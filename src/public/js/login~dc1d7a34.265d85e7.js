@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["login~dc1d7a34"],{"013f":function(n,e,o){"use strict";o.r(e);var t=o("7a23");function c(n,e){return Object(t["o"])(),Object(t["d"])("h1",null,"This is the login page")}const i={};i.render=c;e["default"]=i}}]);
-//# sourceMappingURL=login~dc1d7a34.265d85e7.js.map

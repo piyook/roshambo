@@ -10,6 +10,7 @@ export default {
   state() {
           return {
             user: false,
+            userId:false,
             loading: false,
             error: null,
           }
@@ -19,6 +20,9 @@ export default {
 
     SET_USER(state, user) {
       state.user = user;
+    },
+    SET_USERID(state, id) {
+      state.userId = id;
     },
     SET_LOADING(state, loading) {
       state.loading = loading;
@@ -38,7 +42,7 @@ export default {
           window.localStorage.setItem("guest", true);
         })
         .then(() => {
-          router.push({ path: "/login" });
+          router.push({ path: "/userlogin" });
         })
         .catch((error) => {
           commit("SET_ERROR", getError(error));
@@ -48,9 +52,8 @@ export default {
       commit("SET_LOADING", true);
       return AuthService.getAuthUser()
         .then((response) => {
-
-         alert(response.data.name);
           commit("SET_USER", response.data.name);
+          commit("SET_USERID", response.data.id);
           commit("SET_LOADING", false);
         })
         .catch((error) => {
@@ -70,9 +73,6 @@ export default {
     authUser: (state) => {
       return state.user;
     },
-    isAdmin: (state) => {
-      return state.user ? state.user.isAdmin : false;
-    },
     error: (state) => {
       return state.error;
     },
@@ -85,6 +85,9 @@ export default {
     guest: () => {
       return JSON.parse(window.localStorage.getItem("guest"));
     },
+    getUserId(state){
+      return state.userId;
+    }
 
   }
   

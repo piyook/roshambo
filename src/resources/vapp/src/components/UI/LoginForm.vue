@@ -1,14 +1,15 @@
 <template>
   <form @submit.prevent="submitForm">
     <div class="form-group" v-if="formMode" >
-      <label for="exampleInputEmail1">Name</label>
+      <label for="exampleInputEmail1">Choose A Public User Name</label>
       <input
         type="name"
         class="form-control"
         aria-describedby="nameHelp"
-        placeholder="Enter your name"
+        placeholder="Enter a username"
         v-model="name"
       />
+      <small class="form-text text-muted">Only your username is shown in hiscore tables</small>
     </div>
 
     <div class="form-group">
@@ -41,7 +42,10 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+    <div class="row  justify-content-center">
+      <button type="submit" class="btn btn-primary my-5">Submit</button>
+    </div>
+    
   </form>
 </template>
 
