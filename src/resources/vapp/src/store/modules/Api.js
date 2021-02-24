@@ -15,6 +15,7 @@ export default {
            draws:0,
            userBank:100,
            sessionWinnings:0,
+           hiScores:[],
           }
   },
 
@@ -33,6 +34,9 @@ export default {
       },
       getSessionWinnings(state){
         return state.sessionWinnings;
+      },
+      getHiScores(state){
+        return state.hiScores;
       }
   },
 
@@ -53,14 +57,13 @@ export default {
         updateDraws(state){
           state.draws ++;
         },
-        // setAverage(state, payload){
-       
-        //   state.average = payload.average;
-        // },
         updateSessionWinnings(state, payload) {
     
           const newAmount = state.sessionWinnings + payload.stake;
           state.sessionWinnings = newAmount;
+        },
+        resetSessionWinnings(state){
+          state.sessionWinnings = 0;
         }
    
   },
@@ -71,22 +74,12 @@ export default {
             return await APIService.game(payload);
         },
 
-        // async updateAverage( context) {
+        async loadHiScores(state) {
 
-        //   if (context.state.wins + context.state.losses + context.state.draws < 10) { return }
-
-        //   const averageScore = Math.round(context.state.wins / (context.state.losses + context.state.wins + context.state.draws) * 100);
-        //   context.commit('setAverage', {average:averageScore});
-
-        //   const payload = { userScore : context.state.average,
-        //               userId :  context.rootGetters['auth/getUserId']
-        //             }
-          
-        //   await APIService.postScore(payload);
-
-        //   context.state.wins=context.state.losses=context.state.draws=0;
-         
-        // },
+            const results  = await APIService.getHiscores();
+            state.hiScores = results;
+            return state.hiScores;
+        },
 
         async getUserBank(context){
 
@@ -99,9 +92,11 @@ export default {
           context.state.userBank = userBank;
 
         },
-        // async getAllHiscores(_, payload){
 
-        // },
+        async resetBank() {
+            await APIService.bankReset();
+        },
+     
         updateUserChoice(context, payload) {
           context.commit('updateChoice', payload);
         }

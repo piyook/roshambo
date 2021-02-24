@@ -9,13 +9,14 @@ class Hiscore extends Model
 {
     use HasFactory;
 
-    public function getTopTenScores()
+    public function getTopScores()
     {
 
         return $this
             ->join('users', 'users.id', '=', 'hiscores.userId')
             ->select('users.name', 'score', 'hiscores.created_at')
             ->orderByDesc('score')
+            ->limit(5)
             ->get();
     }
 
@@ -49,5 +50,11 @@ class Hiscore extends Model
         
         $bank = Hiscore::where('userId',$userId);
         $bank->update(["score"=>$newBankFunds]);
+    }
+
+    public function bankReset($userId){
+
+        $bank = Hiscore::where('userId',$userId);
+        $bank->update(["score"=>100]);
     }
 }

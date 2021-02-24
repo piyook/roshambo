@@ -1,12 +1,11 @@
 <template>
 <section v-if="!isAiTurn">
-    <h2 class="display-4 text-warning">Click On One Item Below To Choose</h2>
+    <h3 class="text-warning mt-4 mb-5">Click On An Item Below To Choose</h3>
 
-    <div>
+    <div class="mb-5">
          <img 
          :class="isChosen('rock')" 
-         src="/img/rock.png" 
-         width=150 
+         src="/img/rock.png"  
          @click='chooseItem("rock")'>
 
          <img 
@@ -16,20 +15,17 @@
 
          <img 
          :class="isChosen('scissors')" 
-         src="/img/scissors.png"
-         width=150  
+         src="/img/scissors.png"  
          @click='chooseItem("scissors")'>
 
          <img 
          :class="isChosen('lizard')" 
-         src="/img/lizard.png" 
-         width=150  
+         src="/img/lizard.png"  
          @click='chooseItem("lizard")'>
 
          <img 
          :class="isChosen('spock')" 
-         src="/img/spock.png" 
-         width=150  
+         src="/img/spock.png"  
          @click='chooseItem("spock")'>
 
     </div>
@@ -60,11 +56,7 @@ export default {
             return false;
         }
     },
-    watch:{
-
-
-    }
-    
+   
 }
 </script>
 
@@ -79,11 +71,41 @@ div {
 
 img {
     padding:20px;
+    width:150px;
+    transition: all 0.4s ease-in-out;
+   
+}
+
+img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .selected {
-    border: 2px red solid;
+    background-color:rgba(107, 245, 65, 0.589);
     border-radius:50%;
+    animation: animateSelect 0.8s ease-in-out forwards;
 }
+
+@keyframes animateSelect {
+
+    from {
+        transform: scale(1.0) rotateY(0deg);
+    }
+
+    to {
+        transform: scale(1.1) rotateY(360deg);
+    }
+}
+
+@media only screen and (max-width: 750px) {
+  img {
+    width:90px;
+    padding:10px;
+  }
+
+}
+
+
 
 </style>

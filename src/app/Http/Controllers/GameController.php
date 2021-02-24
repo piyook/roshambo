@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Hiscore;
 
 use Illuminate\Http\Request;
@@ -13,9 +14,19 @@ class GameController extends Controller
     public function playGame(Request $request)
     {
 
-      
+        
         $userGuess = $request->input('userGuess');
         $userStake = $request->input('userStake');
+
+        if (gettype($userStake) !== 'integer') {
+
+          
+            
+            return json_encode(array([
+                "error" => "user stake must be an integer"
+            ]));
+        }
+
         //user id from santum session - use to securely update db
         $userId = auth()->user()->id;
 
@@ -34,31 +45,33 @@ class GameController extends Controller
 
         $gameResult = $this->checkResult($apiGuess, $userGuess);
 
-        array_push ($actions[$randomAction], $gameResult[0]);
-        array_push ($actions[$randomAction], $gameResult[1]);
+        array_push($actions[$randomAction], $gameResult[0]);
+        array_push($actions[$randomAction], $gameResult[1]);
 
 
         $payload = json_decode(json_encode(
-                                ['userId' => $userId,
-                                'stake' =>  $userStake,
-                                'result' => $gameResult[1]
-                                ]));
+            [
+                'userId' => $userId,
+                'stake' =>  $userStake,
+                'result' => $gameResult[1]
+            ]
+        ));
 
-        
+
         if ($this->isBankFundsLow($payload)) {
-            //to do : need to return error : low funds to inform user
-            
-                    return json_encode(array([
-                        "error"=>"no funds"
-                    ]));
-                    } 
+           
+            return json_encode(array([
+                "error" => "no funds"
+            ]));
+        }
 
         $this->updateBank($payload);
 
         return $actions[$randomAction];
     }
 
-    protected function checkResult($apiGuess, $userGuess){
+    protected function checkResult($apiGuess, $userGuess)
+    {
 
         $rules = [
             ["scissors", "paper", "Scissors Cuts Paper"],
@@ -66,60 +79,62 @@ class GameController extends Controller
             ["rock", "lizard", "Rock Crushes Lizard"],
             ["lizard", "spock", "Lizard Poisons Spock"],
             ["spock", "scissors", "Spock Smashes Scissors"],
-            ["scissors", "lizard","Scissors Stab Lizard"],
+            ["scissors", "lizard", "Scissors Stab Lizard"],
             ["lizard", "paper", "Lizard Eats Paper"],
             ["paper", "spock", "Paper Disproves Spock"],
             ["spock", "rock", "Spock Vaporizes Rock"],
             ["rock", "scissors", "Rock Blunts Scissors"],
         ];
 
-        if ($apiGuess === $userGuess) { 
+        if ($apiGuess === $userGuess) {
             return ["Its a Draw", "draw"];
         }
 
 
-       foreach($rules as $scenario){
-           
+        foreach ($rules as $scenario) {
+
             if (in_array($apiGuess, $scenario)) {
                 if (in_array($userGuess, $scenario)) {
-                        //both api and user must have both these items - so which way round
-                            if ( $scenario[0] === $apiGuess){
-                                //api wins
-                                return [$scenario[2], "lose"];
-                            } else {
-                                //user wins
-                                return [$scenario[2], "win"];
-                            }
-                        }
+                    //both api and user must have both these items - so which way round
+                    if ($scenario[0] === $apiGuess) {
+                        //api wins
+                        return [$scenario[2], "lose"];
+                    } else {
+                        //user wins
+                        return [$scenario[2], "win"];
                     }
-       
+                }
+            }
+        }
     }
 
-    }
 
-
-    protected function updateBank($payload) {
+    protected function updateBank($payload)
+    {
 
         $Hiscore = new Hiscore;
 
-        if ($payload->result === 'draw') {return;}
+        if ($payload->result === 'draw') {
+            return;
+        }
 
-        if ($payload->result === 'lose') { $payload->stake = -$payload->stake; }
+        if ($payload->result === 'lose') {
+            $payload->stake = -$payload->stake;
+        }
 
         $Hiscore->updateBank($payload->userId, $payload->stake);
-
     }
 
-    protected function isBankFundsLow($payload ) {
+    protected function isBankFundsLow($payload)
+    {
 
         $Hiscore = new Hiscore;
 
         $bankFunds = $Hiscore->getBank($payload->userId);
 
-        if ($bankFunds - $payload->stake <= 0 ) {
+        if ($bankFunds - $payload->stake < 0) {
             return true;
         }
         return false;
     }
-
 }

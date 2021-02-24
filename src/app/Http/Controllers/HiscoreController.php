@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class HiscoreController extends Controller
 {
 
-    public function TopTenHiscores(Hiscore $Hiscore)
+    public function TopScores(Hiscore $Hiscore)
     {
 
-        return $Hiscore->getTopTenScores();
+        return $Hiscore->getTopScores();
     }
 
 
@@ -22,6 +22,13 @@ class HiscoreController extends Controller
 
     }
 
+    public function resetBank(Hiscore $Hiscore)
+    {
+        $userId = auth()->user()->id;
+
+        $Hiscore->bankReset($userId);
+
+    }
    
 
     

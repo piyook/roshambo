@@ -19,4 +19,5 @@ export default {
 div #nav {
   text-align: right;
 }
+
 </style>

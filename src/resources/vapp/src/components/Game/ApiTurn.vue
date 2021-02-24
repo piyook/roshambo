@@ -1,13 +1,13 @@
 <template>
   <div>
     <div v-if="!isAiTurn" class="centreFlex">
-      <h1>Enter Your Stake</h1>
+      <h2 class="text-primary mr-2">Enter Stake</h2>
       <form  class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
           <input
             id="userStakeInput"
-            type="text"
-            class="form-control"
+            type="number"
+            class="form-control text-primary"
             placeholder="Enter A Stake"
             v-model.number="userStake"
           />
@@ -18,17 +18,17 @@
     <button
       v-if="!isAiTurn"
       type="button"
-      class="btn btn-lg btn-success my-2"
-      @click="play"
+      class="btn btn-lg btn-success mt-4"
+      @click.prevent="play"
     >
       Play Now!
     </button>
 
     <button
-      v-if="isAiTurn"
+      v-if="apiResultCmp"
       type="button"
       class="btn btn-lg btn-success mb-2"
-      @click="again"
+      @click.prevent="again"
     >
       Play Again
     </button>
@@ -44,17 +44,19 @@
           <img
             v-if="userChoice"
             :src="'/img/' + userChoice + '.png'"
-            width="250"
           />
         </div>
 
         <div class="iconCard">
           <h3>AI GUESS</h3>
-          <img
-            v-if="apiGuessResult"
-            :src="'/img/' + apiGuessResult + '.png'"
-            width="250"
-          />
+           <transition name="icon" mode="out-in">
+              <img
+                v-if="apiGuessResult"
+                :src="'/img/' + apiGuessResult + '.png'"
+                :key="Math.random()"
+                width="250"
+              />
+            </transition>
         </div>
       </div>
     </div>
@@ -62,6 +64,7 @@
 </template>
 
 <script>
+import {Modal} from '@/utils/modal';
 export default {
   data() {
     return {
@@ -109,11 +112,25 @@ export default {
       this.apiText = null;
       this.apiResult = null;
 
-      //TODO - add error modal
-      if (this.userStake > this.$store.getters["api/getUserBank"]) {
-        alert("not enough funds - sorry");
+      if (this.userStake <= 0 || typeof(this.userStake) !== "number" ) {
+        await Modal('modalTwo');
         return;
       }
+
+      const bankAmount = this.$store.getters["api/getUserBank"];
+
+      if (this.userStake > bankAmount || bankAmount === 0) {
+
+          
+      if (await Modal('modalOne')) {
+        await this.$store.dispatch('api/resetBank');
+        await this.$store.dispatch('api/getUserBank');
+      }
+      
+        return;
+      }
+
+      
 
       this.$store.commit("api/updateAiTurn", { status: true });
 
@@ -128,16 +145,18 @@ export default {
 
       var i;
 
-      for (i = 0; i < 6; i++) {
+      for (i = 0; i < 5; i++) {
         let values = ["rock", "paper", "scissors", "lizard", "spock"];
         let choice = Math.floor(Math.random() * 5);
         this.apiGuess = values[choice];
-        await delay(300);
+        await delay(1300);
       }
+        this.apiGuess = result[0];
+        await delay(1300);
 
-      [this.apiGuess, this.apiText, this.apiResult] = result;
+        [this.apiGuess, this.apiText, this.apiResult] = result;
 
-      this.updateScores(this.apiResult);
+        this.updateScores(this.apiResult);
     },
     updateScores(result) {
 
@@ -162,8 +181,12 @@ export default {
     again() {
       this.$store.commit("api/updateAiTurn", { status: false });
       this.apiGuess = null;
+      this.apiResult = null;
     },
   },
+  mounted(){
+    this.$store.commit("api/updateAiTurn", { status: false });
+  }
 };
 </script>
 
@@ -177,6 +200,7 @@ export default {
 
 img {
   margin: 20px;
+  width:250px;
 }
 
 button {
@@ -191,5 +215,44 @@ button {
   border: 3px solid lightblue;
   margin: 10px;
   padding: 10px;
+}
+
+input {
+  font-size: 150%;
+  font-weight:bold;
+}
+
+
+.icon-enter-active {
+  animation: icon 0.6s ease-in;
+} 
+
+.icon-leave-active {
+  animation: icon 0.6s ease-out reverse;
+ }
+
+@keyframes icon {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  img {
+    width:150px;
+    margin:10px;
+  }
+
+
+input {
+  font-size: 100%;
+}
+ h2 {
+   font-size:18px;
+ }
 }
 </style>

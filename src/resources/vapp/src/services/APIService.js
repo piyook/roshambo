@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "@/store";
+import {Modal} from '@/utils/modal';
 
 
 const apiClient = axios.create({
@@ -14,7 +15,8 @@ apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
-  function (error) {
+  async function (error) {
+    await Modal("errorModal");
     if (
       error.response &&
       (error.response.status === 401 || error.response.status === 419)
@@ -36,7 +38,8 @@ export default {
         userStake: payload.userStake,
        } 
 
-      );
+      )
+      
     return results.data;
   },
  
@@ -47,4 +50,17 @@ export default {
        );
     return results.data;
   },
+
+  async getHiscores(){
+    await apiClient.get("/sanctum/csrf-cookie");
+    const results = await apiClient.get(
+      "/api/hiscores", 
+       );
+    return results.data;
+  },
+
+  async bankReset(){
+    await apiClient.get("/sanctum/csrf-cookie");
+    await apiClient.post("/api/hiscores");
+  }
 };

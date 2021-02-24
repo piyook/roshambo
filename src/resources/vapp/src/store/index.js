@@ -5,10 +5,14 @@ import rootActions from "./rootActions.js";
 
 import auth from "@/store/modules/Auth";
 import api from "@/store/modules/Api";
+import modal from "@/store/modules/Modal";
 
 
 export default createStore({
-  state: {
+  state() {
+    return {
+      isLoading: false,
+    };
   },
   getters: rootGetters,
   mutations: rootMutations,
@@ -16,5 +20,6 @@ export default createStore({
   modules: {
     auth,
     api,
+    modal,
   }
 })

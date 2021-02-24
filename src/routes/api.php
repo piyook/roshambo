@@ -16,9 +16,6 @@ use App\Http\Controllers\HiscoreController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::middleware('auth:sanctum')->get('/users/{user}', function (Request $request) {
     return $request->user();
@@ -29,9 +26,11 @@ Route::middleware('auth:sanctum')->group( function() {
 
     Route::post('/game', [GameController::class, 'playGame'] );
 
-    Route::get('/hiscores', [HiscoreController::class, 'TopTenHiscores', ]);
+    Route::get('/hiscores', [HiscoreController::class, 'TopScores', ]);
 
     Route::get("/hiscores/{id}", [HiscoreController::class, 'myBank']);
+
+    Route::post("/hiscores", [HiscoreController::class, 'resetBank']);
 
 
 });

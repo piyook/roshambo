@@ -16,7 +16,7 @@
 
             <button 
                 type="button" 
-                class="btn btn-danger btn-lg m-3" 
+                class="btn btn-success btn-lg m-3" 
                 @click.prevent="playGame"
             >
                Start Game
