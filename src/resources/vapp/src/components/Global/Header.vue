@@ -20,7 +20,7 @@
         <router-link to="/about">About</router-link>
     </div>
 
-    <div class="text-right mr-5 mt-4 fixed-top" v-if="authUser">
+    <div class="text-right mr-5 mt-4 fixed-top userDetails" v-if="authUser">
         <p id ="userName"> Player:&nbsp;{{authUser}}</p>
         <button type="button" class="btn btn-secondary" @click="logout">Logout</button>
     </div>
@@ -60,6 +60,10 @@ img {
    margin-left:auto;
    margin-right:auto;
    margin-top: 20px;
+}
+
+.userDetails {
+    opacity:0.8;
 }
 
 @media only screen and (max-width: 750px) {

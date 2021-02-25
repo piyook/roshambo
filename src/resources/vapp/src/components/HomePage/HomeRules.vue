@@ -61,7 +61,11 @@
         <img src="/img/spock.png" />
       </div>
 
-      <ul class="list-group">
+    </div>
+
+    <div>
+      <div id="rulesCard" class="mt-3">
+      <ul class="list-group rulesList">
         <li
           class="list-group-item"
           :class="isHighlighted(['scissors', 'paper'])"
@@ -88,7 +92,7 @@
         </li>
       </ul>
 
-      <ul class="list-group my-4">
+      <ul class="list-group rulesList">
         <li
           class="list-group-item"
           :class="isHighlighted(['scissors', 'lizard'])"
@@ -114,6 +118,7 @@
           Rock Blunts Scissors
         </li>
       </ul>
+      </div>
     </div>
   </section>
 </template>
@@ -191,5 +196,26 @@ li {
 
 .iconSelected {
   border: red 1px solid;
+}
+.rulesList{
+  width:250px;
+  text-align: center;
+}
+
+#rulesCard{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 750px) {
+
+img {
+  width: 80px;
+  margin: 10px 20px 20px 20px;
+}
+
 }
 </style>

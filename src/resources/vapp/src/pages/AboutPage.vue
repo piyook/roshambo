@@ -7,7 +7,7 @@
             <div class="text-info">
                 <h4>This is a demo app coded in Vue-3 and Laravel-8 using Bootswatch 
                 Styling (Superhero).</h4><br>
-                <h4>Laravel is used as a backend API microservice protected
+                <h4>Laravel and MySql is used as a backend API microservice protected
                     using Fortify for Authorization and Sanctum for Authentication. </h4><br>
                 <h4>The App was developed on a local Dockerized Development Set-up.</h4><br>
                 <h4>The Dockerized App was then uploaded to AWS using DockerHub onto an EC2 
