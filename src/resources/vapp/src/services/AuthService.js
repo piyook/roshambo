@@ -22,9 +22,14 @@ authClient.interceptors.response.use(
       if (!store.getters["auth/guest"]) {
         store.dispatch("auth/logout");
       }
-      return Promise.reject(error);
+      return;
     }
+
+    if (error.response && String(error.response.status).match(/^[5]/g) ) {
     await Modal("errorModal");
+    return;
+    }
+
     return Promise.reject(error);
   }
 );
