@@ -9,6 +9,15 @@
     <template v-slot:cancelButton>TRY AGAIN</template>
     </alert-modal>
 
+    <alert-modal :isActive="regErrorModal">
+        <template v-slot:title>Registration Error</template>
+    Email Taken or Password Not Valid. <br>
+    Please Complete ALL fields and Try Again.<br>
+    Go To Login or Try Again?
+    <template v-slot:yesButton>LOGIN</template>
+    <template v-slot:cancelButton>TRY AGAIN</template>
+    </alert-modal>
+
   <form @submit.prevent="submitForm">
     <div class="form-group" v-if="formMode" >
       <label for="exampleInputEmail1">Choose A Public User Name</label>
@@ -89,8 +98,14 @@ export default {
         this.error = null;
         AuthService.registerUser(payload)
           .then(() => this.$router.push({ name: 'Authorized'}))
-          .catch((error) => (this.error = getError(error)));
-        return;
+          .catch(async (error) => {
+          this.error = getError(error);
+          if (await Modal("regErrorModal")) {
+            this.$router.push({ name: 'Login'});
+          }
+        }
+         );
+         return;
       }
 
       AuthService.login(payload)
@@ -115,6 +130,9 @@ export default {
        loginErrorModal() {
                 return this.$store.getters['modal/isModalVisible'] === 'loginErrorModal' ? true : false;
     },
+      regErrorModal() {
+                  return this.$store.getters['modal/isModalVisible'] === 'regErrorModal' ? true : false;
+      },
   },
 };
 </script>

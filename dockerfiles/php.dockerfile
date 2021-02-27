@@ -6,7 +6,7 @@ COPY src .
  
 RUN docker-php-ext-install pdo pdo_mysql
 
-## FOR PRODUCTION : allow acess to session storage otherwise throws errors
+# FOR PRODUCTION : allow acess to session storage otherwise throws errors
 
 # RUN chmod -R gu+w storage
 
