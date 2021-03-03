@@ -22,8 +22,7 @@ authClient.interceptors.response.use(
       if (!store.getters["auth/guest"]) {
         store.dispatch("auth/logout");
       }
-      return;
-      // return Promise.reject(error);
+      return Promise.reject(error);
     }
 
     if (error.response && String(error.response.status).match(/^[5]/g) ) {

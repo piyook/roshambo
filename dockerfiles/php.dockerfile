@@ -6,15 +6,15 @@ COPY src .
  
 RUN docker-php-ext-install pdo pdo_mysql
 
-# FOR PRODUCTION : allow acess to session storage otherwise throws errors
+#  Allow acess to session storage otherwise tLaravel throws errors
 
-# RUN chmod -R gu+w storage
+RUN chmod -R gu+w storage
 
-# RUN chmod -R guo+w storage
+RUN chmod -R guo+w storage
 
-# RUN php artisan cache:clear
+RUN php artisan cache:clear
 
-## FOR DEVELOPMENT : Comment out above and uncomment below to set a 
+## setup a laravel user
  
 RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
 

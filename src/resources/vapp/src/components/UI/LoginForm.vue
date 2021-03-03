@@ -11,7 +11,7 @@
 
     <alert-modal :isActive="regErrorModal">
         <template v-slot:title>Registration Error</template>
-    Email Taken or Password Not Valid. <br>
+    Email Taken or Passwords Dont Match. <br>
     Please Complete ALL fields and Try Again.<br>
     Go To Login or Try Again?
     <template v-slot:yesButton>LOGIN</template>

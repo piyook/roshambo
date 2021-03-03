@@ -1,2 +1,4 @@
-/env
 .env
+.env-prod
+docker-compose.aws.yaml
+docker-compose.prod.yaml
