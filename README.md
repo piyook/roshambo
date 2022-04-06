@@ -14,7 +14,7 @@
     <a href="https://github.com/piyook/roshambo"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="http://roshambo-lb-637952140.eu-west-2.elb.amazonaws.com/">View Demo</a>
+    <a href="https://clients.piyook.com/index.php?token=b8829bb587140f8a8b60">View Demo</a>
   </p>
 </p>
 
@@ -56,7 +56,7 @@
 
  The vue components are stored in a Vapp folder within the Laravel resources folder.
 
- Vue-cli was modded to build the VUE production dist folder to the Laravel 
+ Vite package.json was modded to build the VUE production dist folder to the Laravel 
  public folder and also update the app.blade.php which was used to build 
  the index.html file. In this use-case the laravel blade templating engine is 
  not being used.
@@ -88,7 +88,7 @@ The project can be built and run in docker local containers for convenience.
 
 ### Prerequisites
 
-Node.js and Docker with Docker-Compose need to be installed.
+Node.js (v14 +) and Docker with Docker-Compose need to be installed.
 
 
 ### Installation
@@ -125,8 +125,28 @@ get the containers up and running
   ```sh
   docker-compose up -d server
   ``` 
-The app can be accessed from http://localhost
 
+for vue development, set up the vue container with
+
+  ```sh
+  docker-compose run --rm vue run install
+  ``` 
+then start the Vite server at localhost:3000 using 
+
+ ```sh
+  docker-compose up -d vue
+  ``` 
+you will need to add an .env.local to the folder containing the Vue app and point this to localhost - see the .env.local.example file for the correct format.
+
+Changes to the vue files can be published to the Laravel App using :
+
+```sh
+  docker-compose exec vue run build
+  ``` 
+
+The app can then be accessed from http://localhost
+
+For working 'live' during development from the Vite dev server on port 3000 with the Laravel Backend on port 80 - you will need to set up a proxy by amending the vite.config file - see vite docs https://vitejs.dev/config/#server-proxy.
 
 ## Contact
 
