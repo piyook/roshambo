@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// use Laravel\Fortify\Features;
-// use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
-// use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::any('/{any?}', function () {
+//     return view('app');
+// });
 
 Route::any('/{any}', 'App\Http\Controllers\ViewController@app')->where('any','^(?!api).*$');

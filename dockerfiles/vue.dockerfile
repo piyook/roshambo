@@ -5,11 +5,8 @@ WORKDIR /vapp
 COPY src/resources/vapp/package.json /vapp
 
 RUN npm install
-
-RUN npm install -g @vue/cli
  
 COPY src/resources/vapp ./
 
-EXPOSE 8080
+EXPOSE 3000
 
-CMD ["npm", "run", "serve"]

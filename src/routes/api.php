@@ -16,7 +16,6 @@ use App\Http\Controllers\HiscoreController;
 |
 */
 
-
 Route::middleware('auth:sanctum')->get('/users/{user}', function (Request $request) {
     return $request->user();
 });

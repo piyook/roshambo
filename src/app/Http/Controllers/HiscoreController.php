@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class HiscoreController extends Controller
 {
-
     public function TopScores(Hiscore $Hiscore)
     {
 
@@ -29,7 +28,4 @@ class HiscoreController extends Controller
         $Hiscore->bankReset($userId);
 
     }
-   
-
-    
 }

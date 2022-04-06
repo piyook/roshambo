@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hiscore extends Model
 {
     use HasFactory;
-
+    
     public function getTopScores()
     {
 
@@ -32,6 +32,8 @@ class Hiscore extends Model
 
     public function getBank($id)
     {
+        
+
         $bankFunds =  $this
             ->select('score','created_at')
             ->where('userId', '=', $id)

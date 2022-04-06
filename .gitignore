@@ -1,4 +1,12 @@
+*.env
+.env.*
 .env
 .env-prod
 docker-compose.aws.yaml
 docker-compose.prod.yaml
+
+!.env.example
+
+.vscode
+
+mysql.env

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,12 +17,3 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
     }
 }
-
-\App\Models\User::factory(1)->create(
-
-    [
-        'name' => 'Luke Skywalker',
-        'email' => 'luke@jedi.com',
-        'email_verified_at' => null,
-    ]
-);

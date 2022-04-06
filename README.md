@@ -75,7 +75,8 @@
 ### Built With
 
 * Vue-3
-* Laravel 8
+* Vite
+* Laravel 9
 * Docker
 * Bootswatch
 

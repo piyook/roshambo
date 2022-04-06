@@ -22,7 +22,7 @@ return [
         'register',
         'user/password',
         'forgot-password',
-        'reset-password', 
+        'reset-password',
         'sanctum/csrf-cookie',
         'user/profile-information',
         'email/verification-notification',
@@ -30,7 +30,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost'],
+    'allowed_origins' => ['http://localhost','https://clients.piyook.com/sites/roshambo'],
 
     'allowed_origins_patterns' => [],
 
