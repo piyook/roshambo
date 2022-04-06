@@ -1,9 +1,9 @@
 import axios from "axios";
 import store from "@/store";
-import {Modal} from '@/utils/modal';
+import {Modal} from '@/utils/modal.js';
 
 const authClient = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
+  baseURL: import.meta.env.VITE_APP_API_URL,
   withCredentials: true, // required to handle the CSRF token,
 });
 

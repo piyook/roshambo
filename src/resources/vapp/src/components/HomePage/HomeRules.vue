@@ -18,7 +18,7 @@
         @mouseleave="changeClass(null)"
       >
         <h2 class="display-5 text-primary">Rock</h2>
-        <img src="/img/rock.png" />
+        <img src="@/assets/rock.png" />
       </div>
 
       <div
@@ -28,7 +28,7 @@
         @mouseleave="changeClass(null)"
       >
         <h2 class="display-5 text-primary">Paper</h2>
-        <img src="/img/paper.png" />
+        <img src="@/assets/paper.png" />
       </div>
 
       <div
@@ -38,7 +38,7 @@
         @mouseleave="changeClass(null)"
       >
         <h2 class="display-5 text-primary">Scissors</h2>
-        <img src="/img/scissors.png" />
+        <img src="@/assets/scissors.png" />
       </div>
 
       <div
@@ -48,7 +48,7 @@
         @mouseleave="changeClass(null)"
       >
         <h2 class="text-primary">Lizard</h2>
-        <img src="/img/lizard.png" />
+        <img src="@/assets/lizard.png" />
       </div>
 
       <div
@@ -58,7 +58,7 @@
         @mouseleave="changeClass(null)"
       >
         <h2 class="display-5 text-primary">Spock</h2>
-        <img src="/img/spock.png" />
+        <img src="@/assets/spock.png" />
       </div>
 
     </div>

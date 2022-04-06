@@ -43,7 +43,7 @@
           <h3>YOUR GUESS</h3>
           <img
             v-if="userChoice"
-            :src="'/img/' + userChoice + '.png'"
+            :src="'img/' + userChoice + '.png'"
           />
         </div>
 
@@ -52,7 +52,7 @@
            <transition name="icon" mode="out-in">
               <img
                 v-if="apiGuessResult"
-                :src="'/img/' + apiGuessResult + '.png'"
+                :src="'img/' + apiGuessResult + '.png'"
                 :key="Math.random()"
                 width="250"
               />
@@ -65,6 +65,7 @@
 
 <script>
 import {Modal} from '@/utils/modal';
+import { Spinner } from "@/utils/spinner";
 export default {
   data() {
     return {
@@ -108,10 +109,14 @@ export default {
     },
   },
   methods: {
+    Spinner,
     async play() {
+      this.Spinner(true);
+
       this.apiText = null;
       this.apiResult = null;
 
+      //show alert message if user doesnt have enough money in bank
       if (this.userStake <= 0 || typeof(this.userStake) !== "number" ) {
         await Modal('modalTwo');
         return;
@@ -121,10 +126,12 @@ export default {
 
       if (this.userStake > bankAmount || bankAmount === 0) {
 
-          
+      //reset bank of user wants new game
       if (await Modal('modalOne')) {
+        this.Spinner(true);
         await this.$store.dispatch('api/resetBank');
         await this.$store.dispatch('api/getUserBank');
+        this.Spinner(false);
       }
       
         return;
@@ -144,6 +151,8 @@ export default {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
       var i;
+
+     this.Spinner(false);
 
       for (i = 0; i < 5; i++) {
         let values = ["rock", "paper", "scissors", "lizard", "spock"];

@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import HomeRules from "@/components/HomePage/HomeRules";
-import HiScores from "@/components/Game/HiScores";
+import HomeRules from "@/components/HomePage/HomeRules.vue";
+import HiScores from "@/components/Game/HiScores.vue";
 
 export default {
 

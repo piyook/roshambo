@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import HeaderComp from './components/Global/Header';
+import HeaderComp from '@/components/Global/Header.vue';
 export default {
   components: {
     HeaderComp,

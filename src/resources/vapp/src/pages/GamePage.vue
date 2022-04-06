@@ -1,5 +1,6 @@
 <template>
-<div class="container text-center">
+<div class="container mb-5 text-center">
+    <Teleport to="body">
     <alert-modal :isActive="ModalOne">
         <template v-slot:title>NOT ENOUGH FUNDS</template>
     Enter a Lower Stake or Buy Some More Tokens<br>
@@ -8,13 +9,16 @@
     <template v-slot:yesButton>NEW GAME</template>
     <template v-slot:cancelButton>CANCEL</template>
     </alert-modal>
+    </Teleport>
 
+    <Teleport to="body">
     <alert-modal :isActive="ModalTwo">
         <template v-slot:title>INVALID STAKE</template>
     Please Enter A Number Greater Than Zero
     <template v-slot:yesButton>OK</template>
     <template v-slot:cancelButton>CANCEL</template>
     </alert-modal>
+    </Teleport>
 
     <score-card> </score-card>
     <br>
@@ -27,9 +31,9 @@
 </template>
 
 <script>
-import ApiTurn from '../components/Game/ApiTurn';
-import UserTurn from '../components/Game/UserTurn';
-import ScoreCard from '../components/Game/ScoreCard';
+import ApiTurn from '../components/Game/ApiTurn.vue';
+import UserTurn from '../components/Game/UserTurn.vue';
+import ScoreCard from '../components/Game/ScoreCard.vue';
 
 export default {
 

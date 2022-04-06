@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import LoginForm from "../components/UI/LoginForm";
+import LoginForm from "../components/UI/LoginForm.vue";
 
 export default {
   components: {

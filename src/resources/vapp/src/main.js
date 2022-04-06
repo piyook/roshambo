@@ -6,8 +6,8 @@ import store from './store';
 
 import 'bootswatch/dist/superhero/bootstrap.css';
 
-import AlertModal from '@/components/Global/AlertModal';
-import LoadSpinner from '@/components/Global/LoadSpinner';
+import AlertModal from '@/components/Global/AlertModal.vue';
+import LoadSpinner from '@/components/Global/LoadSpinner.vue';
 
 const app = createApp(App);
 

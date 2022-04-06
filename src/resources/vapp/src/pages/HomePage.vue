@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import HomeHero from "@/components/HomePage/HomeHero";
-import HomeRules from "@/components/HomePage/HomeRules";
+import HomeHero from "@/components/HomePage/HomeHero.vue";
+import HomeRules from "@/components/HomePage/HomeRules.vue";
 
 export default {
   components: {

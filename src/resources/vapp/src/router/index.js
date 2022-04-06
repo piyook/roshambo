@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import store from "@/store/index";
 import HomePage from '../pages/HomePage.vue';
 // import auth from "@/middleware/auth";
-import guest from "@/middleware/guest";
-import auth from "@/middleware/auth";
-import middlewarePipeline from "@/router/middlewarePipeline";
+import guest from "@/middleware/guest.js";
+import auth from "@/middleware/auth.js";
+import middlewarePipeline from "@/router/middlewarePipeline.js";
 
 
 const routes = [
@@ -56,7 +56,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 });
 

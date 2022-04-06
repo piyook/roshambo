@@ -5,27 +5,27 @@
     <div class="mb-5">
          <img 
          :class="isChosen('rock')" 
-         src="/img/rock.png"  
+         src="@/assets/rock.png"  
          @click='chooseItem("rock")'>
 
          <img 
          :class="isChosen('paper')" 
-         src="/img/paper.png" width=150  
+         src="@/assets/paper.png" width=150  
          @click='chooseItem("paper")'>
 
          <img 
          :class="isChosen('scissors')" 
-         src="/img/scissors.png"  
+         src="@/assets/scissors.png"  
          @click='chooseItem("scissors")'>
 
          <img 
          :class="isChosen('lizard')" 
-         src="/img/lizard.png"  
+         src="@/assets/lizard.png"  
          @click='chooseItem("lizard")'>
 
          <img 
          :class="isChosen('spock')" 
-         src="/img/spock.png"  
+         src="@/assets/spock.png"  
          @click='chooseItem("spock")'>
 
     </div>

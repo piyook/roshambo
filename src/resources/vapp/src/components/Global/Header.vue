@@ -8,6 +8,8 @@
     <template v-slot:cancelButton>CANCEL</template>
     </alert-modal>
 
+    <LoadSpinner v-if="isLoading"/>
+
      <img src="@/assets/piyook_logo.png">
      <h5 class="text-center"> Rock, Paper, Scissors, Lizard, Spock </h5>
     <div v-if="!authUser" id="nav" class="text-center mt-2">
@@ -20,7 +22,7 @@
         <router-link to="/about">About</router-link>
     </div>
 
-    <div class="text-right mr-5 mt-4 fixed-top userDetails" v-if="authUser">
+    <div class="container text-right mr-5 mt-4 fixed-top userDetails" v-if="authUser">
         <p id ="userName"> Player:&nbsp;{{authUser}}</p>
         <button type="button" class="btn btn-secondary" @click="logout">Logout</button>
     </div>
@@ -30,20 +32,32 @@
 
 <script>
 import {mapGetters } from 'vuex';
+import LoadSpinner from '@/components/Global/LoadSpinner.vue';
+import { Spinner } from "@/utils/spinner";
 export default {
+
+    components:{
+        LoadSpinner,
+    },
 
     computed:{
         ...mapGetters('auth',['authUser']),
          errorModal() {
                 return this.$store.getters['modal/isModalVisible'] === 'errorModal' ? true : false;
     },
+    isLoading(){
+        return this.$store.getters.checkLoadStatus;
+    }
     },
 
     methods:{
+        Spinner,
         logout(){
            this.$store.dispatch('auth/logout');
+           this.$router.push('/');
+           this.Spinner(true);
         }
-    }
+    },
     
 }
 </script>
