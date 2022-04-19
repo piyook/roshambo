@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "@/store";
 import {Modal} from '@/utils/modal.js';
+import { Spinner } from "@/utils/spinner";
 
 const authClient = axios.create({
   baseURL: import.meta.env.VITE_APP_API_URL,
@@ -15,6 +16,7 @@ authClient.interceptors.response.use(
     return response;
   },
   async function (error) {
+    Spinner(false);
     if (
       error.response &&
       (error.response.status === 401 || error.response.status === 419)

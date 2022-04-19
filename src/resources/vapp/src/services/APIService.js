@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "@/store";
 import {Modal} from '@/utils/modal';
+import { Spinner } from "@/utils/spinner";
 
 
 const apiClient = axios.create({
@@ -16,6 +17,7 @@ apiClient.interceptors.response.use(
     return response;
   },
   async function (error) {
+    Spinner(false);
     await Modal("errorModal");
     if (
       error.response &&
