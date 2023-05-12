@@ -14,7 +14,6 @@
     <a href="https://github.com/piyook/roshambo"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://clients.piyook.com/index.php?token=b8829bb587140f8a8b60">View Demo</a>
   </p>
 </p>
 
