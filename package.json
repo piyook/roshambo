@@ -4,7 +4,7 @@
   "description": "rock paper scissors lizard spock",
   "main": "index.js",
   "scripts": {
-    "setup": "docker compose run --rm composer install && docker compose up -d server && docker compose exec php php artisan key:generate && docker compose exec php php artisan migrate && docker compose run --rm vue install && docker compose up -d vue",
+    "setup": "docker compose run --rm composer install && docker compose up -d server && docker compose exec php php artisan key:generate && docker compose exec php php artisan migrate && docker compose up -d vue",
     "stop": "docker compose down --volumes",
     "start": "docker compose up -d server && docker compose up -d vue",
     "restart": "npm stop && npm start",
