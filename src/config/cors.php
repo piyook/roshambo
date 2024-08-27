@@ -30,7 +30,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost','https://clients.piyook.com/sites/roshambo'],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 

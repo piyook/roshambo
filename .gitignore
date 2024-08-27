@@ -10,3 +10,5 @@ docker-compose.prod.yaml
 .vscode
 
 mysql.env
+
+nuke-it.log
