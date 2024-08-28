@@ -1,13 +1,14 @@
 # *.env
 # .env.*
 # .env
-.env-prod
+# .env-prod
 docker-compose.aws.yaml
 docker-compose.prod.yaml
 
 node_modules/
 
 !.env.example
+
 
 .vscode
 

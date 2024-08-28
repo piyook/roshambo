@@ -23,9 +23,15 @@ if hash base64 2>/dev/null && hash gunzip 2>/dev/null; then
     base64 --decode <<<"H4sIAJQcFFwAA11NQQrDMAy7+xW6NYHiPKAv2B8CTgeBHsYKbcbopW+fHRraTrYSI0UO0CBgsbOvEzXZCTo4JMCrzSL+sJyWtRrK5O1uphOxYE2zqtb9GbX3+56ibmYEG0+jYjD+aUEZSa4IAv0o3jSy2KN0K8qUMb9fG77jhjLjmbF+lsxE9APlrOhe9gAAAA==" | gunzip
 fi
 
+info "> cleaning laravel cache"
+docker compose exec php php artisan cache:clear
 
-info "stopping docker services and deleting all resources"
-info "> stopping"
+info "> cleaning bootstrap cache"
+rm src/bootstrap/cache/packages.php && rm src/bootstrap/cache/services.php
+
+
+
+info "> stopping docker services and deleting all resources"
 docker compose down --rmi all --volumes
 
 
@@ -35,21 +41,23 @@ info "> cleaning npm cache"
 npm cache clean --force
 
 
-info "> checking for package manager and install dependencies"
-if hash npm 2>/dev/null; then
-    info "> using npm, re-installing dependencies ..."
-    npm install >> "$LOG_FILE"
-elif hash yarn 2>/dev/null; then
-    info "> using yarn, re-installing dependencies ..."
-    yarn >> "$LOG_FILE"
-else
-    fail "package manager not found. install dependencies manually."
-fi
+info "> removing vue node_modules"
+rm -rf src/resources/vapp/node_modules
+info "> cleaning npm cache"
+npm cache clean --force
+
+info "> removing vendor files"
+rm -rf vendor 
+
+
 
 info "> building docker resources < please wait - this can take quite a while ;) >"
-docker-compose build --pull --no-cache >> "$LOG_FILE"
+docker compose run --rm composer install >> "$LOG_FILE" \
+    && docker compose up -d mysql >> "$LOG_FILE" \
+    && docker compose up -d php >> "$LOG_FILE" \
+    && docker compose up -d server >> "$LOG_FILE" \
+    && docker compose up -d vue >> "$LOG_FILE" \
+    && docker compose exec php php artisan migrate >> "$LOG_FILE"
 
-info "> start docker in detached mode"
-docker compose up -d
 
 success "*** nuked the project. all build artifacts have been removed and docker restarted. ***"
