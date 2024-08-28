@@ -47,7 +47,7 @@ info "> cleaning npm cache"
 npm cache clean --force
 
 info "> removing vendor files"
-rm -rf vendor 
+rm -rf src/vendor
 
 
 

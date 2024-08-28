@@ -133,10 +133,11 @@ The app is available on localhost:5173
 
 ## Using The App
 
-1. First Create a new user by registering
+1. First Create a new user by registering and then logging in
 2. Once logged in, play the game by putting in a stake value and choosing an icon
+3. Hi-scores will be saved for each logged in user
 
-The user should remain logged beacuse of a long lived access cookie but if required then log in with the credentials created in step 1.
+The user should remain logged because of the long lived Sanctum access cookie but if required then log in with the credentials created in step 1 again.
 
 ## Contact
 
