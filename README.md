@@ -46,11 +46,11 @@
  <img src="images/rules.png" alt="Logo" width="300" height="200">
  </p>
  <br>
- The project is a simple game app based on roshambo (rock,paper,scissors) that 
- has a front-end built with Vue-3 and a back-end API built with Laravel used to record users 
- scores and handle game logic.
+ 
+ 
+The project is a simple game app based on roshambo (rock,paper,scissors) that has a front-end built with Vue-3 and a back-end API built with Laravel used to record users scores and handle game logic.
 
-The vue components are stored in a Vapp folder within the Laravel resources folder.
+The vue components are stored in a <b> Vapp folder within the Laravel resources folder </b>.
 
 Vite package.json was modded to build the VUE production dist folder to the Laravel
 public folder and also update the app.blade.php which was used to build
@@ -71,7 +71,7 @@ The project was developed in, and deployed, using Docker containers.
 
 - Vue-3
 - Vite
-- Laravel 9
+- Laravel 11
 - Docker
 - Bootswatch
 
@@ -81,7 +81,7 @@ The project can be built and run in docker local containers for convenience.
 
 ### Prerequisites
 
-Node.js (v14 +) and Docker with Docker-Compose need to be installed.
+Node.js (v20 +) and Docker Desktop need to be installed.
 
 ### Installation
 
@@ -91,55 +91,48 @@ Node.js (v14 +) and Docker with Docker-Compose need to be installed.
    git clone https://github.com/piyook/roshambo.git
    ```
 
-2. In the env folder use the mysql.env.example to add chosen credentials to
-   create the mySQL database container. Rename this file mysql.env.
-
-3. In the src folder create the Laravel .env file using the .env.example as a guide,
-   adding in your database credentials from step 2.
+2. env files have been included in the repo as this is a demo. Values can be changed in .env,env/mysql.env and src/resources/vapp/.env.local and re-added to .gitignore.
 
 ## Usage
 
-install dependencies
+Initial set-up of the project - pulls docker images and starts services
 
 ```sh
-docker-compose run --rm composer install
+npm run setup
 ```
 
-migrate empty database to the MySQL container
+stop all containers
 
 ```sh
-docker-compose exec php php artisan migrate
+npm stop
 ```
 
-get the containers up and running
+start built containers
 
 ```sh
-docker-compose up -d server
+npm start
 ```
 
-for vue development, set up the vue container with
+re-start containers
 
 ```sh
-docker-compose run --rm vue run install
+npm restart
 ```
 
-then start the Vite server at localhost:3000 using
+<b>Nuke</b> project - removing all caches, node modules, docker resources and rebuild
 
 ```sh
- docker-compose up -d vue
+npm run nuke
 ```
 
-you will need to add an .env.local to the folder containing the Vue app and point this to localhost - see the .env.local.example file for the correct format.
+The app is available on localhost:5173
 
-Changes to the vue files can be published to the Laravel App using :
+## Using The App
 
-```sh
-  docker-compose exec vue run build
-```
+1. First Create a new user by registering
+2. Once logged in, play the game by putting in a stake value and choosing an icon
 
-The app can then be accessed from http://localhost
-
-For working 'live' during development from the Vite dev server on port 3000 with the Laravel Backend on port 80 - you will need to set up a proxy by amending the vite.config file - see vite docs https://vitejs.dev/config/#server-proxy.
+The user should remain logged beacuse of a long lived access cookie but if required then log in with the credentials created in step 1.
 
 ## Contact
 
