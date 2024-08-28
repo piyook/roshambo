@@ -1,0 +1,20 @@
+{
+  "name": "roshambo",
+  "version": "1.0.0",
+  "description": "rock paper scissors lizard spock",
+  "main": "index.js",
+  "scripts": {
+    "setup": "docker compose run --rm composer install && docker compose up -d mysql && docker compose up -d php && docker compose up -d server && docker compose up -d vue && npm run migrate",
+    "migrate": "docker compose exec php php artisan migrate",
+    "laravel:key": "docker compose exec php php artisan key:generate",
+    "laravel:cache": "docker compose exec php php artisan config:cache",
+    "stop": "docker compose down",
+    "start": "docker compose up -d server && docker compose up -d vue",
+    "restart": "npm stop && npm start",
+    "nuke": "bash nuke.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}

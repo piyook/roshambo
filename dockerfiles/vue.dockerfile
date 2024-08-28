@@ -1,12 +1,16 @@
-FROM node:14
- 
-WORKDIR /vapp
+FROM node:20-alpine
 
-COPY src/resources/vapp/package.json /vapp
+WORKDIR /opt/
 
-RUN npm install
- 
-COPY src/resources/vapp ./
+COPY ./src/resources/vapp/package.json ./
 
-EXPOSE 3000
+ENV PATH /opt/node_modules/.bin:$PATH
+
+RUN yarn config set network-timeout 600000 -g && yarn install
+
+WORKDIR /opt/vapp
+
+COPY ./src/resources/vapp ./
+
+EXPOSE 5173
 

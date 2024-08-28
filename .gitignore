@@ -1,12 +1,17 @@
-*.env
-.env.*
-.env
-.env-prod
+# *.env
+# .env.*
+# .env
+# .env-prod
 docker-compose.aws.yaml
 docker-compose.prod.yaml
 
+node_modules/
+
 !.env.example
+
 
 .vscode
 
-mysql.env
+# mysql.env
+
+nuke-it.log
