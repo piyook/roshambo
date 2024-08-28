@@ -1,11 +1,15 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/piyook/roshambo">
-    <img src="images/game.png" alt="Logo" width="200" height="160">
-  </a>
+
 
   <h3 align="center">Rock, Paper, Scissors, Lizard, Spock Game</h3>
+
+  
+
+https://github.com/user-attachments/assets/8fc32d73-c427-4974-b71a-7be17e70f94a
+
+
 
   <p align="center">
     A simple demo app based on Roshambo (rock, paper, scissors) using Vue-3 and Laravel
