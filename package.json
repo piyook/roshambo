@@ -7,6 +7,7 @@
     "setup": "docker compose run --rm composer install && docker compose up -d server",
     "migrate": "docker compose exec php php artisan migrate",
     "laravel:key": "docker compose exec php php artisan key:generate",
+    "laravel:cache": "docker compose exec php php artisan config:cache",
     "stop": "docker compose down --volumes",
     "start": "docker compose up -d server && docker compose up -d vue",
     "restart": "npm stop && npm start",
