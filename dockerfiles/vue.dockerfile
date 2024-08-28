@@ -6,7 +6,7 @@ COPY ./src/resources/vapp/package.json ./
 
 ENV PATH /opt/node_modules/.bin:$PATH
 
-RUN npm install --loglevel verbose
+RUN yarn config set network-timeout 600000 -g && yarn install
 
 WORKDIR /opt/vapp
 

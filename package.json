@@ -4,7 +4,9 @@
   "description": "rock paper scissors lizard spock",
   "main": "index.js",
   "scripts": {
-    "setup": "docker compose run --rm composer install && docker compose up -d server && docker compose exec php php artisan key:generate && docker compose exec php php artisan migrate && docker compose up -d vue",
+    "setup": "docker compose run --rm composer install && docker compose up -d server",
+    "migrate": "docker compose exec php php artisan migrate",
+    "laravel:key": "docker compose exec php php artisan key:generate",
     "stop": "docker compose down --volumes",
     "start": "docker compose up -d server && docker compose up -d vue",
     "restart": "npm stop && npm start",
@@ -12,5 +14,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

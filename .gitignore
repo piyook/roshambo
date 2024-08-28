@@ -5,6 +5,8 @@
 docker-compose.aws.yaml
 docker-compose.prod.yaml
 
+node_modules/
+
 !.env.example
 
 .vscode
