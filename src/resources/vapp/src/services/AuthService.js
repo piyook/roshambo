@@ -52,5 +52,6 @@ export default {
     async registerUser(payload) {
         await authClient.get("/sanctum/csrf-cookie");
         await authClient.post("/register", payload);
+        await authClient.post("/login", payload);
     },
 };
