@@ -23,6 +23,8 @@
 <script>
 import HomeRules from "@/components/HomePage/HomeRules.vue";
 import HiScores from "@/components/Game/HiScores.vue";
+import { Spinner } from "@/utils/spinner.js";
+
 
 export default {
 
@@ -48,8 +50,16 @@ export default {
 
         },
         playGame() {
+            Spinner(true);
             this.$router.push('/game');
-        }
+        },
+
+    },
+    mounted() {
+        Spinner(false);
+    },
+    unmounted() {
+        Spinner(false);
     }
 
 }

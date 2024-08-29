@@ -27,6 +27,9 @@ export default {
             Spinner(true);
             this.$router.push({ name: 'Authorized' });
         },
+        mounted() {
+            Spinner(false);
+        },
         onUnmounted() {
             Spinner(false);
         }

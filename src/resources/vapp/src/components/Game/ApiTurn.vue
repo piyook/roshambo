@@ -2,69 +2,51 @@
   <div>
     <div v-if="!isAiTurn" class="centreFlex">
       <h2 class="text-primary mr-2">Enter Stake</h2>
-      <form  class="form-inline">
+      <form class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
-          <input
-            id="userStakeInput"
-            type="number"
-            class="form-control text-primary"
-            placeholder="Enter A Stake"
-            v-model.number="userStake"
-          />
+          <input id="userStakeInput" type="number" class="form-control text-primary" placeholder="Enter A Stake"
+            v-model.number="userStake" />
         </div>
       </form>
     </div>
 
-    <button
-      v-if="!isAiTurn"
-      type="button"
-      class="btn btn-lg btn-success mt-4"
-      @click.prevent="play"
-    >
+    <button v-if="!isAiTurn" type="button" class="btn btn-lg btn-success mt-4" @click.prevent="play">
       Play Now!
     </button>
 
-    <button
-      v-if="apiResultCmp"
-      type="button"
-      class="btn btn-lg btn-success mb-2"
-      @click.prevent="again"
-    >
+    <button v-if="apiResultCmp" type="button" class="btn btn-lg btn-success mb-2" @click.prevent="again">
       Play Again
     </button>
 
-    <div v-if="apiGuessResult">
-      <h1 class="display-4 mt-3 mb-3" :class="resultBg">{{ apiResultCmp }}</h1>
+    <button v-if="!apiResultCmp & isAiTurn" type="button" class="btn btn-lg btn-success mb-2">
+      Thinking ..
+    </button>
 
-      <h1 class="display-5 mb-3" :class="resultText">{{ apiTextCmp }}</h1>
+    <div v-if="apiGuessResult">
+
 
       <div class="centreFlex">
         <div class="iconCard">
           <h3>YOUR GUESS</h3>
-          <img
-            v-if="userChoice"
-            :src="'img/' + userChoice + '.png'"
-          />
+          <img v-if="userChoice" :src="'img/' + userChoice + '.png'" />
         </div>
 
         <div class="iconCard">
           <h3>AI GUESS</h3>
-           <transition name="icon" mode="out-in">
-              <img
-                v-if="apiGuessResult"
-                :src="'img/' + apiGuessResult + '.png'"
-                :key="Math.random()"
-                width="250"
-              />
-            </transition>
+          <transition name="icon" mode="out-in">
+            <img v-if="apiGuessResult" :src="'img/' + apiGuessResult + '.png'" :key="Math.random()" width="250" />
+          </transition>
         </div>
       </div>
+      <h1 class="display-4 mt-3 mb-3" :class="resultBg">{{ apiResultCmp }}</h1>
+
+      <h1 class="display-5 mb-3" :class="resultText">{{ apiTextCmp }}</h1>
     </div>
   </div>
 </template>
 
 <script>
-import {Modal} from '@/utils/modal';
+import { Modal } from '@/utils/modal';
 import { Spinner } from "@/utils/spinner";
 export default {
   data() {
@@ -117,7 +99,7 @@ export default {
       this.apiResult = null;
 
       //show alert message if user doesnt have enough money in bank
-      if (this.userStake <= 0 || typeof(this.userStake) !== "number" ) {
+      if (this.userStake <= 0 || typeof (this.userStake) !== "number") {
         await Modal('modalTwo');
         return;
       }
@@ -126,18 +108,18 @@ export default {
 
       if (this.userStake > bankAmount || bankAmount === 0) {
 
-      //reset bank of user wants new game
-      if (await Modal('modalOne')) {
-        this.Spinner(true);
-        await this.$store.dispatch('api/resetBank');
-        await this.$store.dispatch('api/getUserBank');
-        this.Spinner(false);
-      }
-      
+        //reset bank of user wants new game
+        if (await Modal('modalOne')) {
+          this.Spinner(true);
+          await this.$store.dispatch('api/resetBank');
+          await this.$store.dispatch('api/getUserBank');
+          this.Spinner(false);
+        }
+
         return;
       }
 
-      
+
 
       this.$store.commit("api/updateAiTurn", { status: true });
 
@@ -152,7 +134,7 @@ export default {
 
       var i;
 
-     this.Spinner(false);
+      this.Spinner(false);
 
       for (i = 0; i < 5; i++) {
         let values = ["rock", "paper", "scissors", "lizard", "spock"];
@@ -160,28 +142,28 @@ export default {
         this.apiGuess = values[choice];
         await delay(1300);
       }
-        this.apiGuess = result[0];
-        await delay(1300);
+      this.apiGuess = result[0];
+      await delay(1300);
 
-        [this.apiGuess, this.apiText, this.apiResult] = result;
+      [this.apiGuess, this.apiText, this.apiResult] = result;
 
-        this.updateScores(this.apiResult);
+      this.updateScores(this.apiResult);
     },
     updateScores(result) {
 
       if (result === "draw") {
         this.$store.commit("api/updateDraws");
-        
+
       }
 
       if (result === "win") {
         this.$store.commit("api/updateWin");
-        this.$store.commit("api/updateSessionWinnings",{stake : +this.userStake});
+        this.$store.commit("api/updateSessionWinnings", { stake: +this.userStake });
       }
 
       if (result === "lose") {
         this.$store.commit("api/updateLosses");
-        this.$store.commit("api/updateSessionWinnings",{stake : -this.userStake});
+        this.$store.commit("api/updateSessionWinnings", { stake: -this.userStake });
       }
 
       this.$store.dispatch('api/getUserBank');
@@ -193,7 +175,7 @@ export default {
       this.apiResult = null;
     },
   },
-  mounted(){
+  mounted() {
     this.$store.commit("api/updateAiTurn", { status: false });
   }
 };
@@ -209,7 +191,7 @@ export default {
 
 img {
   margin: 20px;
-  width:250px;
+  width: 250px;
 }
 
 button {
@@ -228,17 +210,17 @@ button {
 
 input {
   font-size: 150%;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 
 .icon-enter-active {
   animation: icon 0.6s ease-in;
-} 
+}
 
 .icon-leave-active {
   animation: icon 0.6s ease-out reverse;
- }
+}
 
 @keyframes icon {
   from {
@@ -252,16 +234,17 @@ input {
 
 @media only screen and (max-width: 750px) {
   img {
-    width:150px;
-    margin:10px;
+    width: 150px;
+    margin: 10px;
   }
 
 
-input {
-  font-size: 100%;
-}
- h2 {
-   font-size:18px;
- }
+  input {
+    font-size: 100%;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
 }
 </style>
