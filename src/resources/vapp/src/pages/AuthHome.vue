@@ -5,32 +5,26 @@
 
         <div id="buttonBar">
 
-            <button 
-                type="button" 
-                class="btn btn-primary btn-lg m-3" 
-                @click.prevent="showRules"
-            >
+            <button type="button" class="btn btn-primary btn-lg m-3 max-width" @click.prevent="showRules">
                 <span v-if="isRules"> Hide Rules </span>
                 <span v-else> Show Rules </span>
             </button>
 
-            <button 
-                type="button" 
-                class="btn btn-success btn-lg m-3" 
-                @click.prevent="playGame"
-            >
-               Start Game
+            <button type="button" class="btn btn-success btn-lg m-3" @click.prevent="playGame">
+                Start Game
             </button>
 
         </div>
 
-            <home-rules v-if="isRules"></home-rules>
+        <home-rules v-if="isRules"></home-rules>
     </div>
 </template>
 
 <script>
 import HomeRules from "@/components/HomePage/HomeRules.vue";
 import HiScores from "@/components/Game/HiScores.vue";
+import { Spinner } from "@/utils/spinner.js";
+
 
 export default {
 
@@ -38,35 +32,41 @@ export default {
         HomeRules,
         HiScores,
     },
-    data(){
+    data() {
         return {
-            isShowRules:false,
+            isShowRules: false,
         }
     },
-    computed:{
-        isRules(){
+    computed: {
+        isRules() {
             return this.isShowRules;
         }
     },
 
-    methods:{
-        showRules(){
-          
+    methods: {
+        showRules() {
+
             this.isShowRules = !this.isShowRules;
-          
+
         },
-        playGame(){
+        playGame() {
+            Spinner(true);
             this.$router.push('/game');
-        }
+        },
+
+    },
+    mounted() {
+        Spinner(false);
+    },
+    unmounted() {
+        Spinner(false);
     }
-    
+
 }
 </script>
 
 <style scoped>
-
 button {
-    border-radius:10px;
+    border-radius: 10px;
 }
-
 </style>
