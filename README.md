@@ -5,10 +5,9 @@
 
   <h3 align="center">Rock, Paper, Scissors, Lizard, Spock Game</h3>
 
-  
 
-https://github.com/user-attachments/assets/8fc32d73-c427-4974-b71a-7be17e70f94a
 
+https://github.com/user-attachments/assets/aa460fd9-1a0b-41a6-aee4-13564fe6d300
 
 
   <p align="center">
